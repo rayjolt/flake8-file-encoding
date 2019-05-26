@@ -20,7 +20,7 @@ def test_version():
         (
             "open_without_encoding.py",
             1,
-            b"stdin:1:6: FEN001 open() called without an encoding argument\n",
+            b"stdin:1:6: FEN001 open() call has no encoding argument\n",
             b"",
         ),
         ("open_with_encoding.py", 0, b"", b""),

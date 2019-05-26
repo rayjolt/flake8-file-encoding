@@ -28,6 +28,6 @@ class EncodingChecker:
                 yield (
                     node.lineno,
                     node.col_offset,
-                    "FEN001 open() called without an encoding argument",
+                    "FEN001 open() call has no encoding argument",
                     type(self),
                 )
