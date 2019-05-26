@@ -1,6 +1,6 @@
 import ast
 
-__version__ = '0.1.0'
+__version__ = "0.1.0"
 
 
 class EncodingChecker:
@@ -16,9 +16,18 @@ class EncodingChecker:
                 yield err
 
     def rule_FEN001(self, node):
-        if isinstance(node, ast.Call) and isinstance(node.func, ast.Name) and node.func.id == "open":
+        if (
+            isinstance(node, ast.Call)
+            and isinstance(node.func, ast.Name)
+            and node.func.id == "open"
+        ):
             for kwarg in node.keywords:
                 if kwarg.arg == "encoding":
                     break
             else:
-                yield (node.lineno, node.col_offset, "FEN001 open() called without an encoding argument", type(self))
+                yield (
+                    node.lineno,
+                    node.col_offset,
+                    "FEN001 open() called without an encoding argument",
+                    type(self),
+                )

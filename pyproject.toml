@@ -26,6 +26,7 @@ flake8 = "^3.7"
 
 [tool.poetry.dev-dependencies]
 pytest = "^3.0"
+black = {version = "^18.3-alpha.0",allows-prereleases = true}
 
 [tool.poetry.plugins."flake8.extension"]
 FEN = "flake8_file_encoding:EncodingChecker"
