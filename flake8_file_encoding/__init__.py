@@ -21,6 +21,10 @@ class EncodingChecker:
             and isinstance(node.func, ast.Name)
             and node.func.id == "open"
         ):
+            mode = node.args[1].s
+            if "b" in mode:
+                return
+
             for kwarg in node.keywords:
                 if kwarg.arg == "encoding":
                     break
