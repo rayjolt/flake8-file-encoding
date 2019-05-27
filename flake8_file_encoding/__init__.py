@@ -15,13 +15,28 @@ class EncodingChecker:
             for err in self.rule_FEN001(node):
                 yield err
 
+    @staticmethod
+    def get_arg(node, position, keyword):
+        """
+        Gets an argument from a Call node, where the argument can be specified
+        with either a position or a keyword.
+        """
+        args = node.args
+        if len(args) >= position + 1:
+            return args[position].s
+        for kwarg in node.keywords:
+            if kwarg.arg == keyword:
+                return kwarg.value.s
+        raise ValueError('No argument with position {} or keyword "{}" in node {}'.format(position, keyword, repr(node)))
+
+
     def rule_FEN001(self, node):
         if (
             isinstance(node, ast.Call)
             and isinstance(node.func, ast.Name)
             and node.func.id == "open"
         ):
-            mode = node.args[1].s
+            mode = self.get_arg(node, 1, "mode")
             if "b" in mode:
                 return
 
