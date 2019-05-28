@@ -23,10 +23,16 @@ class EncodingChecker:
         """
         args = node.args
         if len(args) >= position + 1:
-            return args[position].s
+            try:
+                return args[position].s
+            except AttributeError:
+                raise TypeError("Argument in position {} is not a string".format(position))
         for kwarg in node.keywords:
             if kwarg.arg == keyword:
-                return kwarg.value.s
+                try:
+                    return kwarg.value.s
+                except AttributeError:
+                    raise TypeError('Keyword argument "{}" is not a string'.format(keyword))
         raise ValueError(
             'No argument with position {} or keyword "{}" in node {}'.format(
                 position, keyword, repr(node)
@@ -43,6 +49,9 @@ class EncodingChecker:
                 mode = self.get_arg(node, 1, "mode")
             except ValueError:
                 mode = "r"
+            except TypeError:
+                # TODO: new error code for invalid modes
+                return
             if "b" in mode:
                 return
 
@@ -55,5 +64,5 @@ class EncodingChecker:
                     "FEN001 open() call has no encoding argument",
                     type(self),
                 )
-            else:
-                return
+            except TypeError:
+                pass

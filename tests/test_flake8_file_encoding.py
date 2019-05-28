@@ -63,6 +63,8 @@ def test_stdin(filename, return_code, expected_stdout, expected_stderr):
         ("open_binary.py", []),
         ("open_binary_with_named_mode.py", []),
         ("open_method.py", []),
+        ("open_with_bad_mode_type.py", []),
+        ("open_with_bad_encoding_type.py", []),
     ],
 )
 def test_all_rules(filename, expected_errors):
