@@ -39,7 +39,10 @@ class EncodingChecker:
             and isinstance(node.func, ast.Name)
             and node.func.id == "open"
         ):
-            mode = self.get_arg(node, 1, "mode")
+            try:
+                mode = self.get_arg(node, 1, "mode")
+            except ValueError:
+                mode = "r"
             if "b" in mode:
                 return
 
