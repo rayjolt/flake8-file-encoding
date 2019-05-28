@@ -27,8 +27,11 @@ class EncodingChecker:
         for kwarg in node.keywords:
             if kwarg.arg == keyword:
                 return kwarg.value.s
-        raise ValueError('No argument with position {} or keyword "{}" in node {}'.format(position, keyword, repr(node)))
-
+        raise ValueError(
+            'No argument with position {} or keyword "{}" in node {}'.format(
+                position, keyword, repr(node)
+            )
+        )
 
     def rule_FEN001(self, node):
         if (
@@ -40,13 +43,14 @@ class EncodingChecker:
             if "b" in mode:
                 return
 
-            for kwarg in node.keywords:
-                if kwarg.arg == "encoding":
-                    break
-            else:
+            try:
+                self.get_arg(node, 3, "encoding")
+            except ValueError:
                 yield (
                     node.lineno,
                     node.col_offset,
                     "FEN001 open() call has no encoding argument",
                     type(self),
                 )
+            else:
+                return

@@ -57,6 +57,7 @@ def test_stdin(filename, return_code, expected_stdout, expected_stderr):
     [
         ("open_without_encoding.py", [[1, 5, FEN001_MSG]]),
         ("open_with_encoding.py", []),
+        ("open_with_positional_encoding.py", []),
         ("open_binary.py", []),
         ("open_binary_with_named_mode.py", []),
     ],
