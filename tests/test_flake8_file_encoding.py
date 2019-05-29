@@ -65,11 +65,24 @@ def test_stdin(filename, return_code, expected_stdout, expected_stderr):
         ("open_method.py", []),
         ("open_with_bad_mode_type.py", []),
         ("open_with_bad_encoding_type.py", []),
+        ("two_open_errors.py", [[2, 9, FEN001_MSG], [6, 5, FEN001_MSG]]),
     ],
 )
 def test_all_rules(filename, expected_errors):
     """Test all of the rules."""
     checker = get_checker(filename)
     checker_type = type(checker)
+
+    # Flake8 expects the checker type to be passed as the last item in the
+    # error tuple, but it doesn't make much sense to add it as a test parameter,
+    # so add it here instead.
     expected_errors = [tuple([*error, checker_type]) for error in expected_errors]
-    assert expected_errors == list(checker.run())
+
+    # Get the actual errors from the checker.
+    actual_errors = list(checker.run())
+
+    # The tree can be walked in an arbitrary order, so sort the results so that
+    # we can do a simple comparison.
+    actual_errors = sorted(actual_errors)
+
+    assert expected_errors == actual_errors
