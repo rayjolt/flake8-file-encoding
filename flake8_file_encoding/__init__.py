@@ -1,6 +1,17 @@
 import ast
+from enum import Enum, auto
+import collections
 
 __version__ = "0.1.0"
+
+
+Argument = collections.namedtuple("Argument", ["state", "value"])
+
+
+class ArgumentState(Enum):
+    POSITIONAL = auto()
+    KEYWORD = auto()
+    NOTFOUND = auto()
 
 
 class EncodingChecker:
@@ -23,21 +34,11 @@ class EncodingChecker:
         """
         args = node.args
         if len(args) >= position + 1:
-            try:
-                return args[position].s
-            except AttributeError:
-                raise TypeError("Argument in position {} is not a string".format(position))
+            return Argument(ArgumentState.POSITIONAL, args[position])
         for kwarg in node.keywords:
             if kwarg.arg == keyword:
-                try:
-                    return kwarg.value.s
-                except AttributeError:
-                    raise TypeError('Keyword argument "{}" is not a string'.format(keyword))
-        raise ValueError(
-            'No argument with position {} or keyword "{}" in node {}'.format(
-                position, keyword, repr(node)
-            )
-        )
+                return Argument(ArgumentState.KEYWORD, kwarg)
+        return Argument(ArgumentState.NOTFOUND, None)
 
     def rule_FEN001(self, node):
         if (
@@ -45,24 +46,22 @@ class EncodingChecker:
             and isinstance(node.func, ast.Name)
             and node.func.id == "open"
         ):
-            try:
-                mode = self.get_arg(node, 1, "mode")
-            except ValueError:
+            mode = self.get_arg(node, 1, "mode")
+            if mode.state == ArgumentState.NOTFOUND:
                 mode = "r"
-            except TypeError:
+            elif isinstance(mode.value, ast.Str):
+                mode = mode.value.s
+            else:
                 # TODO: new error code for invalid modes
                 return
             if "b" in mode:
                 return
 
-            try:
-                self.get_arg(node, 3, "encoding")
-            except ValueError:
+            encoding = self.get_arg(node, 3, "encoding")
+            if encoding.state == ArgumentState.NOTFOUND:
                 yield (
                     node.lineno,
                     node.col_offset,
                     "FEN001 open() call has no encoding argument",
                     type(self),
                 )
-            except TypeError:
-                pass
