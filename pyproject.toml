@@ -6,7 +6,7 @@ readme = "README.md"
 authors = ["Jack Taylor <rayjolt@gmail.com>"]
 license = "MIT"
 homepage = "https://github.com/rayjolt/flake8-file-encoding"
-keywords = "flake8 file open encoding"
+keywords = ["flake8", "file", "open", "encoding"]
 classifiers=[
     'Environment :: Console',
     'Intended Audience :: Developers',
