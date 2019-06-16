@@ -2,7 +2,7 @@
 name = "flake8-file-encoding"
 version = "0.1.0"
 description = "A Flake8 plugin to check for files opened without an explicit encoding"
-readme = "README.rst"
+readme = "README.md"
 authors = ["Jack Taylor <rayjolt@gmail.com>"]
 license = "MIT"
 homepage = "https://github.com/rayjolt/flake8-file-encoding"
