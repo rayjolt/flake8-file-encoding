@@ -1,5 +1,5 @@
 import ast
-from enum import Enum, auto
+from enum import Enum
 import collections
 
 __version__ = "0.1.0"
@@ -9,9 +9,9 @@ Argument = collections.namedtuple("Argument", ["state", "value"])
 
 
 class ArgumentState(Enum):
-    POSITIONAL = auto()
-    KEYWORD = auto()
-    NOTFOUND = auto()
+    POSITIONAL = 1
+    KEYWORD = 2
+    NOTFOUND = 3
 
 
 class EncodingChecker:

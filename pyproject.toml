@@ -8,25 +8,28 @@ license = "MIT"
 homepage = "https://github.com/rayjolt/flake8-file-encoding"
 keywords = ["flake8", "file", "open", "encoding"]
 classifiers=[
-    'Environment :: Console',
-    'Intended Audience :: Developers',
-    'Operating System :: OS Independent',
-    'License :: OSI Approved :: MIT License',
-    'Programming Language :: Python',
-    'Programming Language :: Python :: 3',
-    'Programming Language :: Python :: 3.7',
-    'Topic :: Software Development :: Libraries :: Python Modules',
-    'Topic :: Software Development :: Quality Assurance',
-    'Framework :: Flake8',
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.4",
+    "Programming Language :: Python :: 3.5",
+    "Programming Language :: Python :: 3.6",
+    "Programming Language :: Python :: 3.7",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Software Development :: Quality Assurance",
+    "Framework :: Flake8",
 ]
 
 [tool.poetry.dependencies]
-python = "^3.7"
-flake8 = "^3.7"
+python = "^3.4"
+flake8 = "^3"
 
 [tool.poetry.dev-dependencies]
-pytest = "^3.0"
-black = {version = "^18.3-alpha.0",allows-prereleases = true}
+pytest = "^3"
+black = {version = "^18.3-alpha.0", allows-prereleases = true}
 
 [tool.poetry.plugins."flake8.extension"]
 FEN = "flake8_file_encoding:EncodingChecker"
