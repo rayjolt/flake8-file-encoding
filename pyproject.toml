@@ -30,6 +30,7 @@ flake8 = "^3"
 [tool.poetry.dev-dependencies]
 pytest = "^3"
 pre-commit = "^1.17"
+tox = "^3.12"
 
 [tool.poetry.plugins."flake8.extension"]
 FEN = "flake8_file_encoding:EncodingChecker"
