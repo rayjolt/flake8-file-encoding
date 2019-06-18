@@ -16,7 +16,9 @@ data_dir = current_dir / "data"
 def get_checker(filename):
     """Get an EncodingChecker instance for a given filename."""
     path = data_dir / filename
-    tree = ast.parse(path.read_text(encoding="utf-8"), filename=filename)
+    with path.open("r", encoding="utf-8") as f:
+        code = f.read()
+    tree = ast.parse(code, filename=filename)
     return EncodingChecker(tree)
 
 
