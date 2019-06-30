@@ -2,7 +2,9 @@ import ast
 from enum import Enum
 import collections
 
-__version__ = "0.1.0"
+import pkg_resources
+
+__version__ = pkg_resources.get_distribution("flake8-file-encoding").version
 
 
 Argument = collections.namedtuple("Argument", ["state", "value"])
