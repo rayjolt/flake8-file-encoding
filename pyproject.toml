@@ -32,6 +32,7 @@ setuptools = ">=3.3"
 pytest = "^3"
 pre-commit = "^1.17"
 tox = "^3.12"
+tox-travis = "^0.12.0"
 
 [tool.poetry.plugins."flake8.extension"]
 FEN = "flake8_file_encoding:EncodingChecker"

@@ -304,6 +304,17 @@ toml = ">=0.9.4"
 virtualenv = ">=14.0.0"
 
 [[package]]
+category = "dev"
+description = "Seamless integration of Tox into Travis CI"
+name = "tox-travis"
+optional = false
+python-versions = "*"
+version = "0.12"
+
+[package.dependencies]
+tox = ">=2.0"
+
+[[package]]
 category = "main"
 description = "Type Hints for Python"
 marker = "python_version < \"3.5\""
@@ -329,7 +340,7 @@ python-versions = ">=2.7"
 version = "0.5.1"
 
 [metadata]
-content-hash = "b98a939ac14151678aa22f9fcd9ea800be03112882341baa0388c8392de55dfc"
+content-hash = "8fe95a880d022c9492fe40f438b5c4a269c05775f97146cc73df30e45365de45"
 python-versions = "^3.4"
 
 [metadata.hashes]
@@ -361,6 +372,7 @@ scandir = ["2586c94e907d99617887daed6c1d102b5ca28f1085f90446554abf1faf73123e", "
 six = ["3350809f0555b11f552448330d0b52d5f24c91a322ea4a15ef22629740f3761c", "d16a0141ec1a18405cd4ce8b4613101da75da0e9a7aec5bdd4fa804d0e0eba73"]
 toml = ["229f81c57791a41d65e399fc06bf0848bab550a9dfd5ed66df18ce5f05e73d5c", "235682dd292d5899d361a811df37e04a8828a5b1da3115886b73cf81ebc9100e", "f1db651f9657708513243e61e6cc67d101a39bad662eaa9b5546f789338e07a3"]
 tox = ["45a265e953368fb372cca3eac33b69fdb1b1453e5b114be231c84fc3dfadceed", "f5cb0b5b8d14f2100982b0981c750d840228180a348e6bad355aa38e949fbc3f"]
+tox-travis = ["442c96b078333c94e272d0e90e4582e35e0529ea98bcd2f7f96053d690c4e7a4", "465cd8f71ad878962a3fce0e9e2e213994e0ae4e0c30f87fe6af1b04ea282dc4"]
 typing = ["38566c558a0a94d6531012c8e917b1b8518a41e418f7f15f00e129cc80162ad3", "53765ec4f83a2b720214727e319607879fec4acde22c4fbb54fa2604e79e44ce", "84698954b4e6719e912ef9a42a2431407fe3755590831699debda6fba92aac55"]
 virtualenv = ["b7335cddd9260a3dd214b73a2521ffc09647bde3e9457fcca31dc3be3999d04a", "d28ca64c0f3f125f59cabf13e0a150e1c68e5eea60983cc4395d88c584495783"]
 zipp = ["8c1019c6aad13642199fbe458275ad6a84907634cc9f0989877ccc4a2840139d", "ca943a7e809cc12257001ccfb99e3563da9af99d52f261725e96dfe0f9275bc3"]

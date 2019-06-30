@@ -1,0 +1,26 @@
+language: python
+dist: xenial
+python:
+  - "3.4"
+  - "3.5"
+  - "3.6"
+  - "3.7"
+
+before_install:
+  - pip install poetry
+
+install:
+  - poetry install -v
+
+script:
+  - poetry run tox
+
+before_deploy:
+  - poetry config http-basic.pypi $PYPI_USERNAME $PYPI_PASSWORD
+  - poetry build
+
+deploy:
+  provider: script
+  script: poetry publish
+  on:
+    tags: true
