@@ -1,6 +1,12 @@
+"""
+This is a Flake8 plugin to check for missing "encoding" arguments.
+
+For documentation, see <https://github.com/rayjolt/flake8-file-encoding>.
+"""
+
 import ast
-from enum import Enum
 import collections
+from enum import Enum
 
 import pkg_resources
 
@@ -11,12 +17,23 @@ Argument = collections.namedtuple("Argument", ["state", "value"])
 
 
 class ArgumentState(Enum):
+    """An enum representing the state of an argument to a callable."""
+
     POSITIONAL = 1
     KEYWORD = 2
     NOTFOUND = 3
 
 
 class EncodingChecker:
+    """A Flake8 checker to check for missing "encoding" arguments.
+
+    Parameters
+    ----------
+    tree
+        The abstract syntax tree of the source file being checked.
+
+    """
+
     name = __name__
     version = __version__
 
@@ -24,16 +41,14 @@ class EncodingChecker:
         self.tree = tree
 
     def run(self):
+        """Run all checks."""
         for node in ast.walk(self.tree):
             for err in self.rule_FEN001(node):
                 yield err
 
     @staticmethod
-    def get_arg(node, position, keyword):
-        """
-        Gets an argument from a Call node, where the argument can be specified
-        with either a position or a keyword.
-        """
+    def _get_arg(node, position, keyword):
+        """Get an argument from an AST Call node."""
         args = node.args
         if len(args) >= position + 1:
             return Argument(ArgumentState.POSITIONAL, args[position])
@@ -43,12 +58,13 @@ class EncodingChecker:
         return Argument(ArgumentState.NOTFOUND, None)
 
     def rule_FEN001(self, node):
+        """Check open() calls have an "encoding" argument."""
         if (
             isinstance(node, ast.Call)
             and isinstance(node.func, ast.Name)
             and node.func.id == "open"
         ):
-            mode = self.get_arg(node, 1, "mode")
+            mode = self._get_arg(node, 1, "mode")
             if mode.state == ArgumentState.NOTFOUND:
                 mode = "r"
             elif isinstance(mode.value, ast.Str):
@@ -59,7 +75,7 @@ class EncodingChecker:
             if "b" in mode:
                 return
 
-            encoding = self.get_arg(node, 3, "encoding")
+            encoding = self._get_arg(node, 3, "encoding")
             if encoding.state == ArgumentState.NOTFOUND:
                 yield (
                     node.lineno,
