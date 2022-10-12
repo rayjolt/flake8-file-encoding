@@ -17,6 +17,9 @@ classifiers=[
     "Programming Language :: Python :: 3.5",
     "Programming Language :: Python :: 3.6",
     "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
     "Topic :: Software Development :: Libraries :: Python Modules",
     "Topic :: Software Development :: Quality Assurance",
     "Framework :: Flake8",
@@ -24,7 +27,7 @@ classifiers=[
 
 [tool.poetry.dependencies]
 python = "^3.5"
-flake8 = "^3"
+flake8 = ">=3"
 setuptools = ">=3.3"
 
 [tool.poetry.dev-dependencies]
